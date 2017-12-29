@@ -33,3 +33,4 @@ assets/node_modules/*
 .idea
 .methedras
 methedras.iml
+package-lock.json
