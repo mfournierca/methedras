@@ -6,6 +6,6 @@ defmodule MethedrasWeb.PageController do
   end
 
   def checklist(conn, _params) do
-    render conn, "checklist.html"
+    render conn, "empty.html"
   end
 end
