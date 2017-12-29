@@ -19,3 +19,18 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+
+import React from 'react'
+import { render } from 'react-dom'
+
+import { Provider } from 'react-redux'
+
+import Application from './components/Application'
+import Store from './store/Store'
+
+render(
+  <Provider store={Store}>
+    <Application/>
+  </Provider>,
+  document.getElementById("react-application-root")
+)
