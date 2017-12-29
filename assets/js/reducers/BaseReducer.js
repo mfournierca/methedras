@@ -1,7 +1,7 @@
 import { ACTIONS } from "../actions/Actions"
-
 import { socket, channel } from "../socket"
-static DEFAULT_STATE = {
+
+DEFAULT_STATE = {
   meta: {},
   checklist: {
     items: [

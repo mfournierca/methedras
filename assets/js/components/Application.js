@@ -10,7 +10,12 @@ class App extends Component {
     } = this.props;
 
     return (
-      <div>Application</div>
+      <div>
+        <h2>Checklist</h2>
+        <Checklist
+          state={ state }
+        />
+      </div>
     );
   }
 }
