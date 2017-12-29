@@ -13,11 +13,20 @@ defmodule MethedrasWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :checklist do
+    plug :put_layout, {MethedrasWeb.LayoutView, :checklist}
+  end
+
   scope "/", MethedrasWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/checklist", PageController, :checklist
+  end
+
+  scope "/checklist", MethedrasWeb do
+    pipe_through [:browser, :checklist]
+
+    get "/:checklist_id", PageController, :checklist
   end
 
   # Other scopes may use custom stacks.
