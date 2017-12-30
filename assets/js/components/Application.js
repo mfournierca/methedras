@@ -4,15 +4,16 @@ import Checklist from './Checklist'
 
 class App extends Component {
   render() {
+
     const {
       state
     } = this.props;
 
     return (
       <div>
-        <h2>Checklist</h2>
+        <h2>Application</h2>
         <Checklist
-          state={ state }
+          state={ state.checklist }
         />
       </div>
     );

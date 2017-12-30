@@ -21,7 +21,16 @@ class Checklist extends Component {
     } = this.props;
 
     return (
-      <div>Checklist</div>
+      <div>
+        <div>Checklist</div>
+        {
+          state.items.map(
+            function(item, index) {
+              return <ChecklistItem state={ item } key={ index } />
+            }
+          )
+        }
+      </div>
     );
   }
 }

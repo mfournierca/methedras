@@ -20,7 +20,10 @@ class ChecklistItem extends Component {
     } = this.props;
 
     return (
-      <div>Checklistitem</div>
+      <div>
+        <input type="checkbox" checked={ state.checked } />
+        { state.content }
+      </div>
     );
   }
 }
