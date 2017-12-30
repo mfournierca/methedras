@@ -8,7 +8,7 @@ DEFAULT_STATE = {
       {
         id: 1,
         checked: false,
-        current_owner: nil,
+        current_owner: null,
         content: "Test Item"
       }
     ]
