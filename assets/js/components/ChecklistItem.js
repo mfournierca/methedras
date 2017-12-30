@@ -16,7 +16,8 @@ class ChecklistItem extends Component {
 
     // injected by parent component
     const {
-      state
+      state,
+      index
     } = this.props;
 
     return (

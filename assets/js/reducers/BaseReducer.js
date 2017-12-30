@@ -6,7 +6,7 @@ var DEFAULT_STATE = {
   checklist: {
     items: [
       {
-        id: 1,
+        id: "unique-id-1",
         checked: false,
         current_owner: null,
         content: "Test Item"
@@ -16,6 +16,10 @@ var DEFAULT_STATE = {
 }
 
 function BaseReducer(state=DEFAULT_STATE, action) {
+  switch (action.type) {
+    case ACTIONS.check:
+
+  }
   return state
 }
 

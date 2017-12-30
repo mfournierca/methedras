@@ -4,12 +4,12 @@ export const ACTIONS = {
   UPDATE: "UPDATE"
 };
 
-export function checkAction() {
-  return {type: ACTIONS.CHECK}
+export function checkAction(index) {
+  return {type: ACTIONS.CHECK, index: index}
 }
 
-export function unCheckAction() {
-  return {type: ACTIONS.UNCHECK}
+export function unCheckAction(index) {
+  return {type: ACTIONS.UNCHECK, index: index}
 }
 
 export function updateAction() {
