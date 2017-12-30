@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-// import actions and components
+import Checklist from './Checklist'
 
 class App extends Component {
   render() {

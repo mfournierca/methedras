@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import ChecklistItem from './ChecklistItem'
 
 class Checklist extends Component {
 
