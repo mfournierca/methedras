@@ -26,7 +26,7 @@ class Checklist extends Component {
         {
           state.items.map(
             function(item, index) {
-              return <ChecklistItem state={ item } key={ index } />
+              return <ChecklistItem state={ item } key={ item.id } index={ index } />
             }
           )
         }
