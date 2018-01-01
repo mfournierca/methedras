@@ -17,7 +17,8 @@ class Checklist extends Component {
 
     // injected by parent component
     const {
-      state
+      state,
+      onToggleCheck
     } = this.props;
 
     return (
@@ -26,7 +27,14 @@ class Checklist extends Component {
         {
           state.items.map(
             function(item, index) {
-              return <ChecklistItem state={ item } key={ item.id } index={ index } />
+              return (
+                <ChecklistItem
+                  state={ item }
+                  key={ item.id }
+                  index={ index }
+                  onToggleCheck={ onToggleCheck }
+                />
+              )
             }
           )
         }

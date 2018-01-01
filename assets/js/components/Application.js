@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Checklist from './Checklist'
+import { ACTIONS } from '../actions/Actions'
 
 class App extends Component {
   render() {
 
     const {
-      state
+      state,
+      onToggleCheck
     } = this.props;
 
     return (
@@ -14,6 +16,7 @@ class App extends Component {
         <h2>Application</h2>
         <Checklist
           state={ state.checklist }
+          onToggleCheck={ onToggleCheck }
         />
       </div>
     );
@@ -28,6 +31,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onToggleCheck: (index) => { dispatch({type: ACTIONS.TOGGLECHECK, index: index}) },
   }
 }
 

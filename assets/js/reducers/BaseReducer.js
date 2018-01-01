@@ -16,11 +16,15 @@ var DEFAULT_STATE = {
 }
 
 function BaseReducer(state=DEFAULT_STATE, action) {
-  switch (action.type) {
-    case ACTIONS.check:
+  var newState = Object.assign({}, state)
 
+  switch (action.type) {
+    case ACTIONS.TOGGLECHECK:
+      console.log("TOGGLE CHECK")
+      newState.checklist.items[action.index].checked = !state.checklist.items[action.index].checked
   }
-  return state
+
+  return newState
 }
 
 export default BaseReducer

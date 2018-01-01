@@ -17,12 +17,17 @@ class ChecklistItem extends Component {
     // injected by parent component
     const {
       state,
-      index
+      index,
+      onToggleCheck
     } = this.props;
 
     return (
       <div>
-        <input type="checkbox" checked={ state.checked } />
+        <input
+          type="checkbox"
+          checked={ state.checked }
+          onChange={ onToggleCheck(index) }
+        />
         { state.content }
       </div>
     );

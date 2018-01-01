@@ -1,11 +1,11 @@
 export const ACTIONS = {
-  CHECK: "CHECK",
-  UNCHECK: "UNCHECK",
+  TOGGLECHECK: "TOGGLECHECK",
   UPDATE: "UPDATE"
 };
 
-export function checkAction(index) {
-  return {type: ACTIONS.CHECK, index: index}
+/*
+export function toggleCheckAction(index) {
+  return {type: ACTIONS.TOGGLECHECK, index: index}
 }
 
 export function unCheckAction(index) {
@@ -15,3 +15,4 @@ export function unCheckAction(index) {
 export function updateAction() {
   return {type: ACTIONS.UPDATE}
 }
+*/
