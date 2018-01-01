@@ -28,9 +28,13 @@ function BaseReducer(state=DEFAULT_STATE, action) {
     case ACTIONS.TOGGLECHECK:
       console.log("TOGGLE CHECK")
       newState.checklist.items[action.index].checked = !state.checklist.items[action.index].checked
+      break
+
     case ACTIONS.UPDATETEXT:
       console.log("UPDATE TEXT")
       newState.checklist.items[action.index].content = action.content
+      break
+
     case ACTIONS.NEWITEM:
       var item = {
         id: "item-" + Math.random()*10000000,
@@ -39,6 +43,7 @@ function BaseReducer(state=DEFAULT_STATE, action) {
         content: "New Item"
       }
       newState.checklist.items.push(item)
+      break
   }
 
   return newState
