@@ -31,6 +31,14 @@ function BaseReducer(state=DEFAULT_STATE, action) {
     case ACTIONS.UPDATETEXT:
       console.log("UPDATE TEXT")
       newState.checklist.items[action.index].content = action.content
+    case ACTIONS.NEWITEM:
+      var item = {
+        id: "item-" + Math.random()*10000000,
+        checked: false,
+        current_owner: null,
+        content: "New Item"
+      }
+      newState.checklist.items.push(item)
   }
 
   return newState

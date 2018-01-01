@@ -19,12 +19,13 @@ class Checklist extends Component {
     const {
       state,
       onToggleCheck,
-      onTextChange
+      onTextChange,
+      onNewItem
     } = this.props;
 
     return (
       <div>
-        <div>Checklist</div>
+        <h3>Checklist</h3>
         {
           state.items.map(
             function(item, index) {
@@ -40,6 +41,7 @@ class Checklist extends Component {
             }
           )
         }
+        <button onClick={ onNewItem }>New ...</button>
       </div>
     );
   }
