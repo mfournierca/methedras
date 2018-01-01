@@ -8,7 +8,8 @@ class App extends Component {
 
     const {
       state,
-      onToggleCheck
+      onToggleCheck,
+      onTextChange
     } = this.props;
 
     return (
@@ -17,6 +18,7 @@ class App extends Component {
         <Checklist
           state={ state.checklist }
           onToggleCheck={ onToggleCheck }
+          onTextChange={ onTextChange }
         />
       </div>
     );
@@ -32,6 +34,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onToggleCheck: (index) => { dispatch({type: ACTIONS.TOGGLECHECK, index: index}) },
+    onTextChange: (index, content) => { dispatch({type: ACTIONS.UPDATE, index: index, content: content}) }
   }
 }
 

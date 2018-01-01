@@ -18,7 +18,8 @@ class ChecklistItem extends Component {
     const {
       state,
       index,
-      onToggleCheck
+      onToggleCheck,
+      onTextChange
     } = this.props;
 
     return (
@@ -28,7 +29,11 @@ class ChecklistItem extends Component {
           checked={ state.checked }
           onChange={ () => onToggleCheck(index) }
         />
-        { state.content }
+        <input
+          type="text"
+          value={ state.content }
+          onChange={ (event) => onTextChange(index, event.target.value) }
+        />
       </div>
     );
   }

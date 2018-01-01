@@ -22,6 +22,9 @@ function BaseReducer(state=DEFAULT_STATE, action) {
     case ACTIONS.TOGGLECHECK:
       console.log("TOGGLE CHECK")
       newState.checklist.items[action.index].checked = !state.checklist.items[action.index].checked
+    case ACTIONS.UPDATE:
+      console.log("UPDATE TEXT")
+      newState.checklist.items[action.index].content = action.content
   }
 
   return newState
