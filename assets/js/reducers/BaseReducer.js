@@ -9,13 +9,13 @@ var DEFAULT_STATE = {
         id: "unique-id-1",
         checked: false,
         current_owner: null,
-        content: "Test Item"
+        content: "Add checklist item text here."
       },
       {
         id: "unique-id-2",
         checked: true,
         current_owner: null,
-        content: "Test Item 2"
+        content: "You can add multiple items."
       }
     ]
   }
