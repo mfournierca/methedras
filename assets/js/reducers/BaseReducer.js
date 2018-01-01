@@ -10,6 +10,12 @@ var DEFAULT_STATE = {
         checked: false,
         current_owner: null,
         content: "Test Item"
+      },
+      {
+        id: "unique-id-2",
+        checked: true,
+        current_owner: null,
+        content: "Test Item 2"
       }
     ]
   }
