@@ -27,7 +27,7 @@ class ChecklistItem extends Component {
         <input
           type="checkbox"
           checked={ state.checked }
-          onChange={ () => onToggleCheck(index) }
+          onChange={ (event) => onToggleCheck(index) }
         />
         <input
           type="text"
