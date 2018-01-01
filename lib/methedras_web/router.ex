@@ -21,6 +21,15 @@ defmodule MethedrasWeb.Router do
     get "/checklist/:checklist_id", PageController, :checklist
   end
 
+  scope "/auth", Methedras do
+    pipe_through :browser
+
+    get "/google", AuthController, :request
+    get "/google/callback", AuthController, :callback
+    post "/google/callback", AuthController, :callback
+    get "/logout", AuthController, :delete
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", MethedrasWeb do
   #   pipe_through :api
