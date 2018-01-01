@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onToggleCheck: (index) => { dispatch({type: ACTIONS.TOGGLECHECK, index: index}) },
-    onTextChange: (index, content) => { dispatch({type: ACTIONS.UPDATE, index: index, content: content}) }
+    onTextChange: (index, content) => { dispatch({type: ACTIONS.UPDATETEXT, index: index, content: content}) }
   }
 }
 

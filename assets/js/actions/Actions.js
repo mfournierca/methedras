@@ -1,6 +1,6 @@
 export const ACTIONS = {
   TOGGLECHECK: "TOGGLECHECK",
-  UPDATE: "UPDATE"
+  UPDATETEXT: "UPDATE"
 };
 
 /*
