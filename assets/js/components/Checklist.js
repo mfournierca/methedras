@@ -20,12 +20,13 @@ class Checklist extends Component {
       state,
       onToggleCheck,
       onTextChange,
-      onNewItem
+      onNewItem,
+      onUpdateTitle
     } = this.props;
 
     return (
       <div>
-        <h3>Checklist</h3>
+        <h3><input type="text" onChange={ (event) => onUpdateTitle(event.target.value) } value={ state.title } /></h3>
         {
           state.items.map(
             function(item, index) {

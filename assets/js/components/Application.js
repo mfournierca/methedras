@@ -10,7 +10,8 @@ class App extends Component {
       state,
       onToggleCheck,
       onTextChange,
-      onNewItem
+      onNewItem,
+      onUpdateTitle
     } = this.props;
 
     return (
@@ -21,6 +22,7 @@ class App extends Component {
           onToggleCheck={ onToggleCheck }
           onTextChange={ onTextChange }
           onNewItem={ onNewItem }
+          onUpdateTitle={ onUpdateTitle }
         />
       </div>
     );
@@ -37,7 +39,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onToggleCheck: (index) => { dispatch({type: ACTIONS.TOGGLECHECK, index: index}) },
     onTextChange: (index, content) => { dispatch({type: ACTIONS.UPDATETEXT, index: index, content: content}) },
-    onNewItem: () => { dispatch({type: ACTIONS.NEWITEM}) }
+    onNewItem: () => { dispatch({type: ACTIONS.NEWITEM}) },
+    onUpdateTitle: (title) => { dispatch({type: ACTIONS.UPDATETITLE, title: title}) }
   }
 }
 

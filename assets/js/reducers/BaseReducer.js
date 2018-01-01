@@ -4,6 +4,7 @@ import { socket, channel } from "../socket"
 var DEFAULT_STATE = {
   meta: {},
   checklist: {
+    title: "New Checklist",
     items: [
       {
         id: "unique-id-1",
@@ -43,6 +44,10 @@ function BaseReducer(state=DEFAULT_STATE, action) {
         content: "New Item"
       }
       newState.checklist.items.push(item)
+      break
+
+    case ACTIONS.UPDATETITLE:
+      newState.checklist.title = action.title
       break
   }
 
