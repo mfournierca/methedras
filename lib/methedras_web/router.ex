@@ -17,9 +17,16 @@ defmodule MethedrasWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+  end
 
-    resources "/users", UserController
-    resources "/checklists", ChecklistController
+  scope "/user" do
+    pipe_through :browser
+    resources "/", MethedrasWeb.UserController
+  end
+
+  scope "/checklist" do
+    pipe_through :browser
+    resources "/", MethedrasWeb.ChecklistController
   end
 
   scope "/auth", Methedras do
