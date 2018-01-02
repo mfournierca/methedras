@@ -1,0 +1,5 @@
+<h2>New Checklist</h2>
+
+<%= render "form.html", Map.put(assigns, :action, checklist_path(@conn, :create)) %>
+
+<span><%= link "Back", to: checklist_path(@conn, :index) %></span>

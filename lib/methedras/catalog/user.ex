@@ -2,12 +2,14 @@ defmodule Methedras.Catalog.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Methedras.Catalog.User
-
+  alias Methedras.Catalog.Checklist
 
   schema "users" do
     field :email, :string
     field :realm, :string
     field :username, :string
+
+    has_many :checklists, Checklist, foreign_key: :created_by
 
     timestamps()
   end
