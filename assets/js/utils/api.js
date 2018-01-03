@@ -25,11 +25,28 @@ const saveStateToServer = (dispatch, state) => {
       dataType: "json",
       headers: {
         "X-CSRF-TOKEN": csrf
-      }
-    })
-    .fail(() => { dispatch({type: ACTIONS.LOG, message: "save state post fail"}) })
-    .done(() => { dispatch({type: ACTIONS.LOG, message: "save state post done"}) })
-    .always(() => { dispatch({type: ACTIONS.LOG, message: "save state post always"}) });
+      },
+      success: (data) => { dispatch({type: ACTIONS.LOG, message: "save state post done"}) },
+      error: () => { dispatch({type: ACTIONS.LOG, message: "save state post fail"}) }
+    });
 };
+
+const getStateFromServer = (dispatch) => {
+  var id = window.location.path.split("/")[1]
+  var dest = "http://" + window.location.host.toString() + "/checklist/" + window.location.pathname.split("/")[1] + "/data"
+  var csrf = getCSRF()
+
+  console.log("Getting checklist data: " + dest)
+  jquery
+    .ajax({
+      type: "get",
+      url: dest,
+      headers: {
+        "X-CSRF-TOKEN": csrf
+      },
+      success: (data) => { dispatch({type: ACTIONS.LOG, message: "get state success"}) },
+      error: () => { dispatch({type: ACTIONS.LOG, message: "get state fail"}) }
+    });
+}
 
 export { saveStateToServer };
