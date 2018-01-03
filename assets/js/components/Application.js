@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Checklist from './Checklist'
 import { ACTIONS } from '../actions/Actions'
-import { saveStateToServer } from '../utils/api'
+import { saveStateToServer, loadStateFromServer } from '../utils/api'
 
 class App extends Component {
-  render() {
 
+  componentDidMount() {
+    this.props.loadState()
+  }
+
+  render() {
     const {
       state,
       onToggleCheck,
@@ -44,7 +48,8 @@ const mapDispatchToProps = (dispatch) => {
     onTextChange:     (index, content) => { dispatch({type: ACTIONS.UPDATETEXT, index: index, content: content}) },
     onNewItem:        () => { dispatch({type: ACTIONS.NEWITEM}) },
     onUpdateTitle:    (title) => { dispatch({type: ACTIONS.UPDATETITLE, title: title}) },
-    onSave:           (state) => { saveStateToServer(dispatch, state) }
+    onSave:           (state) => { saveStateToServer(dispatch, state) },
+    loadState:        () => { loadStateFromServer(dispatch) }
   }
 }
 

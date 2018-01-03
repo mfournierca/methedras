@@ -31,9 +31,9 @@ const saveStateToServer = (dispatch, state) => {
     });
 };
 
-const getStateFromServer = (dispatch) => {
-  var id = window.location.path.split("/")[1]
-  var dest = "http://" + window.location.host.toString() + "/checklist/" + window.location.pathname.split("/")[1] + "/data"
+const loadStateFromServer = (dispatch) => {
+  var id = window.location.pathname.split("/")[2]
+  var dest = "http://" + window.location.host.toString() + "/checklist/" + id + "/data"
   var csrf = getCSRF()
 
   console.log("Getting checklist data: " + dest)
@@ -49,4 +49,4 @@ const getStateFromServer = (dispatch) => {
     });
 }
 
-export { saveStateToServer };
+export { saveStateToServer, loadStateFromServer };

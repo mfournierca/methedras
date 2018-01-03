@@ -39,7 +39,8 @@ defmodule MethedrasWeb.ChecklistController do
   def edit(conn, %{"id" => id}) do
     checklist = Catalog.get_checklist!(id)
     changeset = Catalog.change_checklist(checklist)
-    render(conn, "edit.html", checklist: checklist, changeset: changeset)
+    #render(conn, "edit.html", checklist: checklist, changeset: changeset)
+    render(conn, "edit.html")
   end
 
   def update(conn, %{"id" => id, "checklist" => checklist_params}) do

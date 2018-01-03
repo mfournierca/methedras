@@ -1,6 +1,3 @@
 <h2>Edit Checklist</h2>
 <span><%= link "Back", to: checklist_path(@conn, :index) %></span>
 <div id="react-application-root"/>
-
-<!-- <%= render "form.html", Map.put(assigns, :action, checklist_path(@conn, :update, @checklist)) %> -->
-
