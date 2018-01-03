@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Checklist from './Checklist'
 import { ACTIONS } from '../actions/Actions'
+import { saveStateToServer } from '../utils/api'
 
 class App extends Component {
   render() {
@@ -11,7 +12,8 @@ class App extends Component {
       onToggleCheck,
       onTextChange,
       onNewItem,
-      onUpdateTitle
+      onUpdateTitle,
+      onSave
     } = this.props;
 
     return (
@@ -23,6 +25,7 @@ class App extends Component {
           onTextChange={ onTextChange }
           onNewItem={ onNewItem }
           onUpdateTitle={ onUpdateTitle }
+          onSave={ onSave }
         />
       </div>
     );
@@ -40,7 +43,8 @@ const mapDispatchToProps = (dispatch) => {
     onToggleCheck:    (index) => { dispatch({type: ACTIONS.TOGGLECHECK, index: index}) },
     onTextChange:     (index, content) => { dispatch({type: ACTIONS.UPDATETEXT, index: index, content: content}) },
     onNewItem:        () => { dispatch({type: ACTIONS.NEWITEM}) },
-    onUpdateTitle:    (title) => { dispatch({type: ACTIONS.UPDATETITLE, title: title}) }
+    onUpdateTitle:    (title) => { dispatch({type: ACTIONS.UPDATETITLE, title: title}) },
+    onSave:           (state) => { saveStateToServer(dispatch, state) }
   }
 }
 

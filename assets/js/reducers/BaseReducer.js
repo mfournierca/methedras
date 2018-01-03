@@ -49,6 +49,10 @@ function BaseReducer(state=DEFAULT_STATE, action) {
     case ACTIONS.UPDATETITLE:
       newState.checklist.title = action.title
       break
+
+    case ACTIONS.LOG:
+      console.log(action.message)
+      break
   }
 
   return newState

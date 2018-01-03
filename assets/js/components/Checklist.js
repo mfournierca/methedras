@@ -21,7 +21,8 @@ class Checklist extends Component {
       onToggleCheck,
       onTextChange,
       onNewItem,
-      onUpdateTitle
+      onUpdateTitle,
+      onSave
     } = this.props;
 
     return (
@@ -43,6 +44,7 @@ class Checklist extends Component {
           )
         }
         <button onClick={ onNewItem }>New ...</button>
+        <button onClick={ () => onSave(state) }>Save</button>
       </div>
     );
   }
