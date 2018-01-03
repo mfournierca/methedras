@@ -1,9 +1,7 @@
 const jquery = require("jquery")
 import { ACTIONS } from "../actions/Actions"
 
-const saveStateToServer = (dispatch, state) => {
-  var dest = "http://" + window.location.host.toString() + "/checklist"
-
+function getCSRF() {
   var csrf = null
   var meta_tags = document.getElementsByTagName("meta")
   for (var i = 0; i < meta_tags.length; i++) {
@@ -12,6 +10,12 @@ const saveStateToServer = (dispatch, state) => {
       break
     }
   }
+  return csrf
+}
+
+const saveStateToServer = (dispatch, state) => {
+  var dest = "http://" + window.location.host.toString() + "/checklist"
+  var csrf = getCSRF()
 
   jquery
     .ajax({
