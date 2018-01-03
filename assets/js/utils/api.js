@@ -17,7 +17,7 @@ const saveStateToServer = (dispatch, state) => {
     .ajax({
       type: "post",
       url: dest,
-      data: state,
+      data: {"checklist": {"data": state.checklist}},
       dataType: "json",
       headers: {
         "X-CSRF-TOKEN": csrf
