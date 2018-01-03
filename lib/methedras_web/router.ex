@@ -27,6 +27,7 @@ defmodule MethedrasWeb.Router do
   scope "/checklist" do
     pipe_through :browser
     resources "/", MethedrasWeb.ChecklistController
+    get "/:id/data", MethedrasWeb.ChecklistController, :data
   end
 
   scope "/auth", Methedras do

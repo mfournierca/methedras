@@ -30,6 +30,12 @@ defmodule MethedrasWeb.ChecklistController do
     render(conn, "show.html", checklist: checklist)
   end
 
+  def data(conn, %{"id" => id}) do
+    checklist = Catalog.get_checklist!(id)
+    # IO.puts(Poison.encode!(checklist.data))
+    render(conn, "data.json", checklist: checklist.data)
+  end
+
   def edit(conn, %{"id" => id}) do
     checklist = Catalog.get_checklist!(id)
     changeset = Catalog.change_checklist(checklist)
