@@ -53,6 +53,9 @@ function BaseReducer(state=DEFAULT_STATE, action) {
     case ACTIONS.LOG:
       console.log(action.message)
       break
+
+    case ACTIONS.SETSTATE:
+      return action.state
   }
 
   return newState

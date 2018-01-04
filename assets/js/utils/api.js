@@ -17,6 +17,7 @@ const saveStateToServer = (dispatch, state) => {
   var dest = "http://" + window.location.host.toString() + "/checklist"
   var csrf = getCSRF()
 
+
   jquery
     .ajax({
       type: "post",
@@ -41,10 +42,35 @@ const loadStateFromServer = (dispatch) => {
     .ajax({
       type: "get",
       url: dest,
+      dataType: "json",
       headers: {
         "X-CSRF-TOKEN": csrf
       },
-      success: (data) => { dispatch({type: ACTIONS.LOG, message: "get state success"}) },
+      success: (response, code, xhr) => {
+
+        /*
+        Checklist state gets mangled by the POST method above. The array is
+        converted into an object whose keys are array indices. Have to convert
+        it back.
+        Should be able to fix this either in the POST method above or by
+        enforcing a JSON schema in postgres. The current solution is a hack.
+        */
+        var checklistState = xhr.responseJSON["checklist"]["data"]
+        var items = checklistState["items"]
+        checklistState["items"] = []
+        for (var key in items) {
+          checklistState["items"].push(items[key])
+        }
+        /* End hack */
+
+        dispatch({
+          type: ACTIONS.SETSTATE,
+          state: {
+            meta: {},
+            checklist: checklistState
+          }
+        });
+      },
       error: () => { dispatch({type: ACTIONS.LOG, message: "get state fail"}) }
     });
 }
