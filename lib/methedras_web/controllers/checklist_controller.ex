@@ -11,7 +11,7 @@ defmodule MethedrasWeb.ChecklistController do
     render(conn, "index.json", checklists: checklists)
   end
 
-  def create(conn, %{"checklist" => checklist_params}) do
+  def create(conn, %{"data" => checklist_params}) do
     with {:ok, %Checklist{} = checklist} <- Catalog.create_checklist(checklist_params) do
       conn
       |> put_status(:created)
@@ -25,7 +25,7 @@ defmodule MethedrasWeb.ChecklistController do
     render(conn, "show.json", checklist: checklist)
   end
 
-  def update(conn, %{"id" => id, "checklist" => checklist_params}) do
+  def update(conn, %{"id" => id, "data" => checklist_params}) do
     checklist = Catalog.get_checklist!(id)
 
     with {:ok, %Checklist{} = checklist} <- Catalog.update_checklist(checklist, checklist_params) do

@@ -23,12 +23,11 @@ const saveStateToServer = (dispatch, state) => {
   var dest = getApiPath()
   var csrf = getCSRF()
 
-
   jquery
     .ajax({
       type: "put",
       url: dest,
-      data: {"data": state.checklist},
+      data: {"data": {"data": state.data}}, // strip out the id
       dataType: "json",
       headers: {
         "X-CSRF-TOKEN": csrf
@@ -61,18 +60,18 @@ const loadStateFromServer = (dispatch) => {
         enforcing a JSON schema in postgres. The current solution is a hack.
         */
         var checklistState = xhr.responseJSON["data"]
-        var items = checklistState["items"]
-        checklistState["items"] = []
+        var items = checklistState["data"]["items"]
+        checklistState["data"]["items"] = []
         for (var key in items) {
-          checklistState["items"].push(items[key])
+          checklistState["data"]["items"].push(items[key])
         }
         /* End hack */
 
         dispatch({
           type: ACTIONS.SETSTATE,
           state: {
-            meta: {},
-            checklist: checklistState
+            id: xhr.responseJSON["id"],
+            data: checklistState["data"]
           }
         });
       },

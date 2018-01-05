@@ -27,9 +27,9 @@ class Checklist extends Component {
 
     return (
       <div>
-        <h3><input type="text" onChange={ (event) => onUpdateTitle(event.target.value) } value={ state.checklist.title } /></h3>
+        <h3><input type="text" onChange={ (event) => onUpdateTitle(event.target.value) } value={ state.data.title } /></h3>
         {
-          state.checklist.items.map(
+          state.data.items.map(
             function(item, index) {
               return (
                 <ChecklistItem

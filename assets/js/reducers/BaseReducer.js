@@ -2,8 +2,8 @@ import { ACTIONS } from "../actions/Actions"
 import { socket, channel } from "../socket"
 
 var DEFAULT_STATE = {
-  meta: {},
-  checklist: {
+  id: "unique-checklist-id",
+  data: {
     title: "New Checklist",
     items: [
       {
@@ -28,12 +28,12 @@ function BaseReducer(state=DEFAULT_STATE, action) {
   switch (action.type) {
     case ACTIONS.TOGGLECHECK:
       console.log("TOGGLE CHECK")
-      newState.checklist.items[action.index].checked = !state.checklist.items[action.index].checked
+      newState.data.items[action.index].checked = !state.data.items[action.index].checked
       break
 
     case ACTIONS.UPDATETEXT:
       console.log("UPDATE TEXT")
-      newState.checklist.items[action.index].content = action.content
+      newState.data.items[action.index].content = action.content
       break
 
     case ACTIONS.NEWITEM:
@@ -43,11 +43,11 @@ function BaseReducer(state=DEFAULT_STATE, action) {
         current_owner: null,
         content: "New Item"
       }
-      newState.checklist.items.push(item)
+      newState.data.items.push(item)
       break
 
     case ACTIONS.UPDATETITLE:
-      newState.checklist.title = action.title
+      newState.data.title = action.title
       break
 
     case ACTIONS.LOG:
