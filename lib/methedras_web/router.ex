@@ -19,17 +19,6 @@ defmodule MethedrasWeb.Router do
     get "/", PageController, :index
   end
 
-  scope "/user" do
-    pipe_through :browser
-    resources "/", MethedrasWeb.UserController
-  end
-
-  scope "/checklist" do
-    pipe_through :browser
-    resources "/", MethedrasWeb.ChecklistController
-    get "/:id/data", MethedrasWeb.ChecklistController, :data
-  end
-
   scope "/auth", Methedras do
     pipe_through :browser
 
