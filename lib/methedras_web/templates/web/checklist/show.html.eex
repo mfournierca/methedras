@@ -1,0 +1,13 @@
+<h2>Show Checklist</h2>
+
+<ul>
+
+  <li>
+    <strong>Data:</strong>
+    <%= @checklist.data %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: web_checklist_path(@conn, :edit, @checklist) %></span>
+<span><%= link "Back", to: web_checklist_path(@conn, :index) %></span>
