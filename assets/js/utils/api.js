@@ -13,16 +13,22 @@ function getCSRF() {
   return csrf
 }
 
+function getApiPath() {
+  var id = window.location.pathname.split("/")[2]
+  var dest = "http://" + window.location.host.toString() + "/api/v1/checklist/" + id
+  return dest
+}
+
 const saveStateToServer = (dispatch, state) => {
-  var dest = "http://" + window.location.host.toString() + "/checklist"
+  var dest = getApiPath()
   var csrf = getCSRF()
 
 
   jquery
     .ajax({
-      type: "post",
+      type: "put",
       url: dest,
-      data: {"checklist": {"data": state.checklist}},
+      data: {"data": state.checklist},
       dataType: "json",
       headers: {
         "X-CSRF-TOKEN": csrf
@@ -33,8 +39,7 @@ const saveStateToServer = (dispatch, state) => {
 };
 
 const loadStateFromServer = (dispatch) => {
-  var id = window.location.pathname.split("/")[2]
-  var dest = "http://" + window.location.host.toString() + "/checklist/" + id + "/data"
+  var dest = getApiPath()
   var csrf = getCSRF()
 
   console.log("Getting checklist data: " + dest)
@@ -55,7 +60,7 @@ const loadStateFromServer = (dispatch) => {
         Should be able to fix this either in the POST method above or by
         enforcing a JSON schema in postgres. The current solution is a hack.
         */
-        var checklistState = xhr.responseJSON["checklist"]["data"]
+        var checklistState = xhr.responseJSON["data"]
         var items = checklistState["items"]
         checklistState["items"] = []
         for (var key in items) {
