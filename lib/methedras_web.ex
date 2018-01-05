@@ -17,6 +17,9 @@ defmodule MethedrasWeb do
   and import those modules here.
   """
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: MethedrasWeb
