@@ -1,0 +1,12 @@
+<h2>Show Checklist</h2>
+<ul>
+
+  <li>
+    <strong>Data:</strong>
+    <%= @checklist.data["title"] %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: page_path(@conn, :checklist_edit) %></span>
+<span><%= link "Back", to: page_path(@conn, :checklist_index) %></span>

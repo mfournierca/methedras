@@ -1,5 +1,7 @@
 defmodule MethedrasWeb.PageController do
   use MethedrasWeb, :controller
+  alias Methedras.Catalog
+  alias Methedras.Catalog.Checklist
 
   def index(conn, _params) do
     render conn, "index.html"
@@ -7,55 +9,36 @@ defmodule MethedrasWeb.PageController do
 
   def checklist_index(conn, _params) do
     checklists = Catalog.list_checklists()
-    render(conn, "checklist/index.html", checklists: checklists)
+    render(conn, "checklist_index.html", checklists: checklists)
   end
 
-  def checklist_new(conn, _params) do
-    changeset = Catalog.change_checklist(%Checklist{})
-    render(conn, "checklist/new.html", changeset: changeset)
-  end
-
-  def checklist_create(conn, %{"checklist" => checklist_params}) do
-    case Catalog.create_checklist(checklist_params) do
+  def checklist_create(conn) do
+    case Catalog.create_checklist(%{"data": %{"title": "default checklist title", "items": []}}) do
       {:ok, checklist} ->
         conn
         |> put_flash(:info, "Checklist created successfully.")
-        |> redirect(to: web_checklist_path(conn, :show, checklist))
+        |> redirect(to: page_path(conn, :checklist_show))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
-  end
-
-  def show(conn, %{"id" => id}) do
-    checklist = Catalog.get_checklist!(id)
-    render(conn, "show.html", checklist: checklist)
-  end
-
-  def edit(conn, %{"id" => id}) do
-    checklist = Catalog.get_checklist!(id)
-    changeset = Catalog.change_checklist(checklist)
-    render(conn, "edit.html", checklist: checklist, changeset: changeset)
-  end
-
-  def update(conn, %{"id" => id, "checklist" => checklist_params}) do
-    checklist = Catalog.get_checklist!(id)
-
-    case Catalog.update_checklist(checklist, checklist_params) do
-      {:ok, checklist} ->
         conn
-        |> put_flash(:info, "Checklist updated successfully.")
-        |> redirect(to: web_checklist_path(conn, :show, checklist))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", checklist: checklist, changeset: changeset)
+        |> put_flash(:error, "Checklist creation failed.")
+        |> redirect(to: page_path(conn, :checklist_index))
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def checklist_show(conn, %{"id" => id}) do
+    render(conn, "checklist_show.html")
+  end
+
+  def checklist_edit(conn, %{"id" => id}) do
+    render(conn, "checklist_edit.html")
+  end
+
+  def checklist_delete(conn, %{"id" => id}) do
     checklist = Catalog.get_checklist!(id)
     {:ok, _checklist} = Catalog.delete_checklist(checklist)
 
     conn
     |> put_flash(:info, "Checklist deleted successfully.")
-    |> redirect(to: web_checklist_path(conn, :index))
+    |> redirect(to: page_path(conn, :index))
   end
 end
