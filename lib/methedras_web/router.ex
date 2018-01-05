@@ -19,6 +19,12 @@ defmodule MethedrasWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/api/v1/" do
+    pipe_through :api
+
+    resources "/checklist", ChecklistController
+  end
+
   scope "/auth", Methedras do
     pipe_through :browser
 
