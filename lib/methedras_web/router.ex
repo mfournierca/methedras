@@ -1,5 +1,6 @@
 defmodule MethedrasWeb.Router do
   use MethedrasWeb, :router
+  alias MethedrasWeb.ChecklistController
 
   pipeline :browser do
     plug :accepts, ["html"]
