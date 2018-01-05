@@ -18,6 +18,7 @@ defmodule MethedrasWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/checklist", PageController, :checklist_index
   end
 
   scope "/api/v1/" do
