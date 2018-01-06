@@ -12,12 +12,12 @@ defmodule MethedrasWeb.PageController do
     render(conn, "checklist_index.html", checklists: checklists)
   end
 
-  def checklist_create(conn) do
+  def checklist_create(conn, %{}) do
     case Catalog.create_checklist(%{"data": %{"title": "default checklist title", "items": []}}) do
       {:ok, checklist} ->
         conn
         |> put_flash(:info, "Checklist created successfully.")
-        |> redirect(to: page_path(conn, :checklist_show))
+        |> redirect(to: page_path(conn, :checklist_show, checklist))
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
         |> put_flash(:error, "Checklist creation failed.")
