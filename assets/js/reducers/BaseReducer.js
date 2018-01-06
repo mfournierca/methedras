@@ -25,14 +25,14 @@ var DEFAULT_STATE = {
 function BaseReducer(state=DEFAULT_STATE, action) {
   var newState = Object.assign({}, state)
 
+  console.log(JSON.stringify(action))
+
   switch (action.type) {
     case ACTIONS.TOGGLECHECK:
-      console.log("TOGGLE CHECK")
-      newState.data.items[action.index].checked = !state.data.items[action.index].checked
+      newState.data.items[action.index].checked = action.value
       break
 
     case ACTIONS.UPDATETEXT:
-      console.log("UPDATE TEXT")
       newState.data.items[action.index].content = action.content
       break
 
