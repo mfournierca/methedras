@@ -3,6 +3,9 @@ import { socket, channel } from "../socket"
 
 var DEFAULT_STATE = {
   id: "unique-checklist-id",
+  meta: {
+    loading: true
+  },
   data: {
     title: "New Checklist",
     items: [

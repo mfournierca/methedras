@@ -20,19 +20,25 @@ class App extends Component {
       onSave
     } = this.props;
 
-    return (
-      <div>
-        <h2>Application</h2>
-        <Checklist
-          state={ state }
-          onToggleCheck={ onToggleCheck }
-          onTextChange={ onTextChange }
-          onNewItem={ onNewItem }
-          onUpdateTitle={ onUpdateTitle }
-          onSave={ onSave }
-        />
-      </div>
-    );
+    if (!(state.meta === undefined || state.meta.loading === undefined) && state.meta.loading) {
+      return (
+        <div>Loading ... </div>
+      );
+    } else {
+      return (
+        <div>
+          <h2>Application</h2>
+          <Checklist
+            state={ state }
+            onToggleCheck={ onToggleCheck }
+            onTextChange={ onTextChange }
+            onNewItem={ onNewItem }
+            onUpdateTitle={ onUpdateTitle }
+            onSave={ onSave }
+          />
+        </div>
+      );
+    }
   }
 }
 
