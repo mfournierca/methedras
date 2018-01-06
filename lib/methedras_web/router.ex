@@ -21,7 +21,7 @@ defmodule MethedrasWeb.Router do
     get "/checklist", PageController, :checklist_index
     get "/checklist/:id/edit", PageController, :checklist_edit
     get "/checklist/:id/show", PageController, :checklist_show
-    get "/checklist/:id/delete", PageController, :checklist_delete
+    delete "/checklist/:id/delete", PageController, :checklist_delete
     get "/checklist/create", PageController, :checklist_create
   end
 
