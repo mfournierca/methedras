@@ -25,7 +25,11 @@ defmodule MethedrasWeb.PageController do
     end
   end
 
-  def checklist_show(conn, %{"id" => id}) do
+  def checklist_show(conn, %{"checklist_id" => checklist_id}) do
+    render(conn, "checklist_show.html")
+  end
+
+  def checklist_show(conn, %{"checklist_id" => checklist_id, "execution_id" => execution_id}) do
     render(conn, "checklist_show.html")
   end
 

@@ -1,6 +1,7 @@
 defmodule MethedrasWeb.Router do
   use MethedrasWeb, :router
   alias MethedrasWeb.ChecklistController
+  alias MethedrasWeb.ExecutionController
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -18,17 +19,25 @@ defmodule MethedrasWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/checklist", PageController, :checklist_index
-    get "/checklist/:id/edit", PageController, :checklist_edit
-    get "/checklist/:id/show", PageController, :checklist_show
-    delete "/checklist/:id/delete", PageController, :checklist_delete
-    get "/checklist/create", PageController, :checklist_create
+  end
+
+  scope "/checklist", MethedrasWeb do
+    pipe_through :browser
+
+    get "/", PageController, :checklist_index
+    get "/:id/edit", PageController, :checklist_edit
+    delete "/:id/delete", PageController, :checklist_delete
+    get "/create", PageController, :checklist_create
+
+    get "/:checklist_id/execute", PageController, :checklist_show
+    get "/:checklist_id/execute/:execution_id", PageController, :checklist_show
   end
 
   scope "/api/v1/" do
     pipe_through :api
 
     resources "/checklist", ChecklistController
+    resources "/execution", ExecutionController
   end
 
   scope "/auth", Methedras do
