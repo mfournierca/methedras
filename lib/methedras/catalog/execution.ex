@@ -2,14 +2,13 @@ defmodule Methedras.Catalog.Execution do
   use Ecto.Schema
   import Ecto.Changeset
   alias Methedras.Catalog.Execution
-
+  alias Methedras.Catalog.Checklist
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "executions" do
     field :data, :map
-    field :checklist_id, :binary_id
-
+    has_one :checklists, Checklist
     timestamps()
   end
 
