@@ -1,13 +1,10 @@
 import { ACTIONS } from "../actions/Actions"
 import { socket, channel } from "../socket"
+import { canEdit, canCheck } from "../utils/utils"
 
 var DEFAULT_STATE = {
   id: "unique-checklist-id",
   loading: true,
-  meta: {
-    checkable: false,
-    editable: true
-  },
   data: {
     title: "New Checklist",
     items: [
@@ -34,25 +31,41 @@ function BaseReducer(state=DEFAULT_STATE, action) {
 
   switch (action.type) {
     case ACTIONS.TOGGLECHECK:
-      newState.data.items[action.index].checked = action.value
+      if (canCheck()) {
+        newState.data.items[action.index].checked = action.value
+      } else {
+        console.log("Not on a checkable path, cannot check item")
+      }
       break
 
     case ACTIONS.UPDATETEXT:
-      newState.data.items[action.index].content = action.content
+      if (canEdit()) {
+        newState.data.items[action.index].content = action.content
+      } else {
+        console.log("Not on an editable path, cannot edit item")
+      }
       break
 
     case ACTIONS.NEWITEM:
-      var item = {
-        id: "item-" + Math.random()*10000000,
-        checked: false,
-        current_owner: null,
-        content: "New Item"
+      if (canEdit()) {
+        var item = {
+          id: "item-" + Math.random()*10000000,
+          checked: false,
+          current_owner: null,
+          content: "New Item"
+        }
+        newState.data.items.push(item)
+      } else {
+        console.log("Not on an editable path, cannot add item")
       }
-      newState.data.items.push(item)
       break
 
     case ACTIONS.UPDATETITLE:
-      newState.data.title = action.title
+      if (canEdit()) {
+        newState.data.title = action.title
+      } else {
+        console.log("Not on an editable path, cannot edit title")
+      }
       break
 
     case ACTIONS.LOG:
