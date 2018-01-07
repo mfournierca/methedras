@@ -8,7 +8,7 @@ defmodule Methedras.Catalog.Execution do
   @foreign_key_type :binary_id
   schema "executions" do
     field :data, :map
-    belongs_to :checklist, Checklist
+    belongs_to :checklist, Checklist, foreign_key: :checklist_id
     timestamps()
   end
 
@@ -16,6 +16,6 @@ defmodule Methedras.Catalog.Execution do
   def changeset(%Execution{} = execution, attrs) do
     execution
     |> cast(attrs, [:data, :checklist_id])
-    |> validate_required([:data])
+    |> validate_required([:data, :checklist_id])
   end
 end

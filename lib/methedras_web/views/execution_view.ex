@@ -12,6 +12,7 @@ defmodule MethedrasWeb.ExecutionView do
 
   def render("execution.json", %{execution: execution}) do
     %{id: execution.id,
+      checklist_id: execution.checklist_id,
       data: execution.data}
   end
 end
