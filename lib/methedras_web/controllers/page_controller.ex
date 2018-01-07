@@ -16,7 +16,7 @@ defmodule MethedrasWeb.PageController do
       {:ok, checklist} ->
         conn
         |> put_flash(:info, "Checklist created successfully.")
-        |> redirect(to: page_path(conn, :checklist_show, checklist))
+        |> redirect(to: page_path(conn, :checklist_edit, checklist))
       {:error, %Ecto.Changeset{} = _} ->
         conn
         |> put_flash(:error, "Checklist creation failed.")
