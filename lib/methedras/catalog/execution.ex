@@ -8,14 +8,14 @@ defmodule Methedras.Catalog.Execution do
   @foreign_key_type :binary_id
   schema "executions" do
     field :data, :map
-    has_one :checklists, Checklist
+    belongs_to :checklist, Checklist
     timestamps()
   end
 
   @doc false
   def changeset(%Execution{} = execution, attrs) do
     execution
-    |> cast(attrs, [:data])
+    |> cast(attrs, [:data, :checklist_id])
     |> validate_required([:data])
   end
 end

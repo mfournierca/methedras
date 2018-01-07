@@ -8,7 +8,7 @@ defmodule Methedras.Catalog.Checklist do
   @foreign_key_type :binary_id
   schema "checklists" do
     field :data, :map
-    has_many :executions, Execution
+    has_many :execution, Execution
     timestamps()
   end
 
