@@ -29,8 +29,8 @@ defmodule MethedrasWeb.Router do
     delete "/:id/delete", PageController, :checklist_delete
     get "/create", PageController, :checklist_create
 
-    get "/:checklist_id/execute", PageController, :checklist_show
-    get "/:checklist_id/execute/:execution_id", PageController, :checklist_show
+    get "/:checklist_id/execute", PageController, :execution_create
+    get "/:checklist_id/execute/:id", PageController, :execution_show
   end
 
   scope "/api/v1/" do
