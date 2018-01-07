@@ -1,7 +1,6 @@
 defmodule MethedrasWeb.PageController do
   use MethedrasWeb, :controller
   alias Methedras.Catalog
-  alias Methedras.Catalog.Checklist
 
   def index(conn, _params) do
     render conn, "index.html"
@@ -18,7 +17,7 @@ defmodule MethedrasWeb.PageController do
         conn
         |> put_flash(:info, "Checklist created successfully.")
         |> redirect(to: page_path(conn, :checklist_show, checklist))
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, %Ecto.Changeset{} = _} ->
         conn
         |> put_flash(:error, "Checklist creation failed.")
         |> redirect(to: page_path(conn, :checklist_index))
@@ -34,11 +33,11 @@ defmodule MethedrasWeb.PageController do
     |> redirect(to: page_path(conn, :checklist_show, execution))
   end
 
-  def checklist_show(conn, %{"checklist_id" => checklist_id, "id" => execution_id}) do
+  def checklist_show(conn, %{"checklist_id" => _, "id" => _}) do
     render(conn, "checklist_show.html")
   end
 
-  def checklist_edit(conn, %{"id" => id}) do
+  def checklist_edit(conn, %{"id" => _}) do
     render(conn, "checklist_edit.html")
   end
 
