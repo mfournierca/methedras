@@ -20,7 +20,7 @@ class App extends Component {
       onSave
     } = this.props;
 
-    if (!(state.meta === undefined || state.meta.loading === undefined) && state.meta.loading) {
+    if (!(state === undefined || state.loading === undefined) && state.loading) {
       return (
         <div>Loading ... </div>
       );
