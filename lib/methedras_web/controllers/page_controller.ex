@@ -26,10 +26,15 @@ defmodule MethedrasWeb.PageController do
   end
 
   def checklist_show(conn, %{"checklist_id" => checklist_id}) do
-    render(conn, "checklist_show.html")
+    checklist = Catalog.get_checklist!(checklist_id)
+    {:ok, execution} = Catalog.create_execution(%{"checklist_id": checklist.id, "data": checklist.data})
+
+    conn
+    |> put_flash(:info, "Created execution")
+    |> redirect(to: page_path(conn, :checklist_show, execution))
   end
 
-  def checklist_show(conn, %{"checklist_id" => checklist_id, "execution_id" => execution_id}) do
+  def checklist_show(conn, %{"checklist_id" => checklist_id, "id" => execution_id}) do
     render(conn, "checklist_show.html")
   end
 
