@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Checklist from './Checklist'
 import { ACTIONS } from '../actions/Actions'
-import { saveStateToServer, loadStateFromServer } from '../utils/api'
+import { saveChecklistState, saveExecutionState, loadChecklistState, loadExecutionState } from '../utils/api'
+import { canEdit, canCheck } from '../utils/utils'
 
 class App extends Component {
 
@@ -49,13 +50,27 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    onToggleCheck:    (index, value) => { dispatch({type: ACTIONS.TOGGLECHECK, index: index, value: value}) },
-    onTextChange:     (index, content) => { dispatch({type: ACTIONS.UPDATETEXT, index: index, content: content}) },
-    onNewItem:        () => { dispatch({type: ACTIONS.NEWITEM}) },
-    onUpdateTitle:    (title) => { dispatch({type: ACTIONS.UPDATETITLE, title: title}) },
-    onSave:           (state) => { saveStateToServer(dispatch, state) },
-    loadState:        () => { loadStateFromServer(dispatch) }
+
+  if (!canCheck() && canEdit) {
+    return {
+      onToggleCheck:    (index, value) => { console.log("canCheck flag is false, cannot check item") },
+      onTextChange:     (index, content) => { dispatch({type: ACTIONS.UPDATETEXT, index: index, content: content}) },
+      onNewItem:        () => { dispatch({type: ACTIONS.NEWITEM}) },
+      onUpdateTitle:    (title) => { dispatch({type: ACTIONS.UPDATETITLE, title: title}) },
+      onSave:           (state) => { saveChecklistState(dispatch, state) },
+      loadState:        () => { loadChecklistState(dispatch) }
+    }
+  } else if (canCheck() && !canEdit()) {
+    return {
+      onToggleCheck:    (index, value) => { dispatch({type: ACTIONS.TOGGLECHECK, index: index, value: value}) },
+      onTextChange:     (index, content) => { console.log("canEdit is false, cannot edit text") },
+      onNewItem:        () => { console.log("canEdit is false, cannot add new item") },
+      onUpdateTitle:    (title) => { console.log("canEdit is false, cannot edit title") },
+      onSave:           (state) => { saveExecutionState(dispatch, state) },
+      loadState:        () => { loadExecutionState(dispatch) }
+    }
+  } else {
+    console.log("Invalid url path state")
   }
 }
 

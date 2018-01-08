@@ -13,70 +13,124 @@ function getCSRF() {
   return csrf
 }
 
-function getApiPath() {
+function getChecklistApiPath() {
   var id = window.location.pathname.split("/")[2]
   var dest = "http://" + window.location.host.toString() + "/api/v1/checklist/" + id
   return dest
 }
 
-const saveStateToServer = (dispatch, state) => {
-  var dest = getApiPath()
+function getExecutionApiPath() {
+  var id = window.location.pathname.split("/")[4]
+  var dest = "http://" + window.location.host.toString() + "/api/v1/execution/" + id
+  return dest
+}
+
+function put(url, data, onSuccess, onError) {
   var csrf = getCSRF()
 
+  console.log("PUT data: " + url)
   jquery
     .ajax({
       type: "put",
-      url: dest,
-      data: {"data": {"data": state.data}}, // strip out the id
+      url: url,
+      data: data,
       dataType: "json",
       headers: {
         "X-CSRF-TOKEN": csrf
       },
-      success: (data) => { dispatch({type: ACTIONS.LOG, message: "save state post done"}) },
-      error: () => { dispatch({type: ACTIONS.LOG, message: "save state post fail"}) }
-    });
-};
-
-const loadStateFromServer = (dispatch) => {
-  var dest = getApiPath()
-  var csrf = getCSRF()
-
-  console.log("Getting checklist data: " + dest)
-  jquery
-    .ajax({
-      type: "get",
-      url: dest,
-      dataType: "json",
-      headers: {
-        "X-CSRF-TOKEN": csrf
-      },
-      success: (response, code, xhr) => {
-
-        /*
-        Checklist state gets mangled by the POST method above. The array is
-        converted into an object whose keys are array indices. Have to convert
-        it back.
-        Should be able to fix this either in the POST method above or by
-        enforcing a JSON schema in postgres. The current solution is a hack.
-        */
-        var checklistState = xhr.responseJSON["data"]
-        var items = checklistState["data"]["items"]
-        checklistState["data"]["items"] = []
-        for (var key in items) {
-          checklistState["data"]["items"].push(items[key])
-        }
-        /* End hack */
-
-        dispatch({
-          type: ACTIONS.SETSTATE,
-          state: {
-            id: xhr.responseJSON["id"],
-            data: checklistState["data"]
-          }
-        });
-      },
-      error: () => { dispatch({type: ACTIONS.LOG, message: "get state fail"}) }
+      success: onSuccess,
+      error: onError
     });
 }
 
-export { saveStateToServer, loadStateFromServer };
+function get(url, onSuccess, onError) {
+  var csrf = getCSRF()
+
+  console.log("GET data: " + url)
+  jquery
+    .ajax({
+      type: "get",
+      url: url,
+      dataType: "json",
+      headers: {
+        "X-CSRF-TOKEN": csrf
+      },
+      success: onSuccess,
+      error: onError
+    });
+}
+
+function unWindChecklistState(checklistState) {
+    /*
+    Checklist state gets mangled by the method above. The items array is
+    converted into an object whose keys are array indices. Have to convert
+    it back.
+    Should be able to fix this either in the POST method above or by
+    enforcing a JSON schema in postgres. The current solution is a hack.
+    */
+    var items = checklistState["data"]["items"]
+    checklistState["data"]["items"] = []
+    for (var key in items) {
+      checklistState["data"]["items"].push(items[key])
+    }
+    /* End hack */
+    return checklistState;
+}
+
+const saveChecklistState = (dispatch, state) => {
+  var dest = getChecklistApiPath()
+  put(
+    dest,
+    {"data": {"data": state.data}}, // strip out the id
+    (data) => { dispatch({type: ACTIONS.LOG, message: "save state post done"}) },
+    () => { dispatch({type: ACTIONS.LOG, message: "save state post fail"}) }
+  )
+};
+
+const saveExecutionState = (dispatch, state) => {
+  var dest = getExecutionApiPath()
+  put(
+    dest,
+    {"execution": {"data": state.data}}, // strip out ids
+    (data) => { dispatch({type: ACTIONS.LOG, message: "save execution state done"}) },
+    () => { dispatch({type: ACTIONS.LOG, message: "save execution state fail"}) }
+  );
+}
+
+const loadChecklistState = (dispatch) => {
+  var dest = getChecklistApiPath()
+  get(
+    dest,
+    (response, code, xhr) => {
+      var checklistState = unWindChecklistState(xhr.responseJSON["data"])
+      dispatch({
+        type: ACTIONS.SETSTATE,
+        state: {
+          id: checklistState["id"],
+          data: checklistState["data"]
+        }
+      });
+    },
+    () => { dispatch({type: ACTIONS.LOG, message: "get state fail"}) }
+  );
+}
+
+const loadExecutionState = (dispatch) => {
+  var dest = getExecutionApiPath()
+  get(
+    dest,
+    (response, code, xhr) => {
+      var executionState = unWindChecklistState(xhr.responseJSON["data"])
+      dispatch({
+        type: ACTIONS.SETSTATE,
+        state: {
+          id: executionState["id"],
+          data: executionState["data"]
+        }
+      });
+    },
+    () => { dispatch({type: ACTIONS.LOG, message: "get state fail"}) }
+  );
+}
+
+export { saveChecklistState, saveExecutionState, loadChecklistState, loadExecutionState };
