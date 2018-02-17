@@ -27,7 +27,7 @@ var DEFAULT_STATE = {
 function BaseReducer(state=DEFAULT_STATE, action) {
   var newState = Object.assign({}, state)
 
-  console.log(JSON.stringify(action))
+  // console.log(JSON.stringify(action))
 
   switch (action.type) {
     case ACTIONS.TOGGLECHECK:
