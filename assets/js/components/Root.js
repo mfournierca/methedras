@@ -3,7 +3,7 @@ import { Provider }         from 'react-redux';
 import { Router }           from 'react-router';
 import { invariant }        from 'invariant';
 import { RoutingContext }   from 'react-router';
-import configRoutes         from '../routes';
+import configRoutes         from '../routes/Routes';
 
 export default class Root extends React.Component {
   render() {
