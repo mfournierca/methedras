@@ -4,5 +4,5 @@ import BaseReducer          from './BaseReducer';
 
 export default combineReducers({
   routing: routerReducer,
-  base: BaseReducer
+  checklist: BaseReducer
 });

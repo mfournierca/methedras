@@ -30,7 +30,7 @@ class App extends Component {
         <div>
           <h2>Application</h2>
           <Checklist
-            state={ state }
+            state={ state.checklist }
             onToggleCheck={ onToggleCheck }
             onTextChange={ onTextChange }
             onNewItem={ onNewItem }
