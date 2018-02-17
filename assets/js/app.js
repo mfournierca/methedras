@@ -23,12 +23,13 @@ import "phoenix_html"
 import React                      from 'react';
 import { render }                 from 'react-dom';
 
-import { browserHistory }         from 'react-router';
+import { createBrowserHistory }   from 'history';
 import { syncHistoryWithStore }   from 'react-router-redux';
 
-import Application                from './components/Application';
 import configureStore             from './store/Store';
+import Root                       from './components/Root';
 
+const browserHistory = createBrowserHistory();
 const store = configureStore(browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 

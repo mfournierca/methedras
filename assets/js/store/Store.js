@@ -6,9 +6,6 @@ import reducers from "../reducers";
 
 export default function configureStore(browserHistory) {
   const reduxRouterMiddleWare = routerMiddleware(browserHistory);
-
   const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleWare, thunkMiddleware)(createStore);
-  const Store = createStoreWithMiddleware(reducers);
-
-  return Store;
+  return createStoreWithMiddleware(reducers);
 }
