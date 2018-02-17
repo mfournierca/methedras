@@ -12,14 +12,18 @@ class App extends Component {
   }
 
   render() {
+
     const {
       state,
+      match,
       onToggleCheck,
       onTextChange,
       onNewItem,
       onUpdateTitle,
       onSave
     } = this.props;
+
+    console.log("routerMatch: " + JSON.stringify(match));
 
     if (!(state === undefined || state.loading === undefined) && state.loading) {
       return (

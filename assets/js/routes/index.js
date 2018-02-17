@@ -5,7 +5,7 @@ import Application                    from '../components/Application';
 export default function configRoutes() {
 
   return (
-    <Route path='/' component={ Application }>
+    <Route path='/:id' component={ Application }>
     </Route>
   );
 }
