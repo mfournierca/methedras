@@ -20,17 +20,19 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
-import React from 'react'
-import { render } from 'react-dom'
+import React                      from 'react';
+import { render }                 from 'react-dom';
 
-import { Provider } from 'react-redux'
+import { browserHistory }         from 'react-router';
+import { syncHistoryWithStore }   from 'react-router-redux';
 
-import Application from './components/Application'
-import Store from './store/Store'
+import Application                from './components/Application';
+import configureStore             from './store/Store';
 
-render(
-  <Provider store={Store}>
-    <Application />
-  </Provider>,
-  document.getElementById("react-application-root")
-)
+const store = configureStore(browserHistory);
+const history = syncHistoryWithStore(browserHistory, store);
+
+const target = document.getElementById("react-application-root");
+const node = <Root routerHistory={ history } store={ store }/>;
+
+render(node, target);
