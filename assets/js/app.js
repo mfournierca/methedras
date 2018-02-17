@@ -30,7 +30,7 @@ import configureStore             from './store/Store';
 import Root                       from './components/Root';
 
 const browserHistory = createBrowserHistory();
-const store = configureStore(browserHistory);
+const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
 
 const target = document.getElementById("react-application-root");
