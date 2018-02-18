@@ -5,8 +5,8 @@ defmodule MethedrasWeb.ExecutionAppController do
   alias Methedras.Catalog.ExecutionApp
 
   def index(conn, _params) do
-    executionapp = Catalog.list_executionapp()
-    render(conn, "index.html", executionapp: executionapp)
+    executions = Catalog.list_executions()
+    render(conn, "index.html", executions: executions)
   end
 
   def new(conn, _params) do
