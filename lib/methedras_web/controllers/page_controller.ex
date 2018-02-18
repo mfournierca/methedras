@@ -6,10 +6,6 @@ defmodule MethedrasWeb.PageController do
     render conn, "index.html"
   end
 
-  def checklist_edit(conn, %{"id" => _}) do
-    render(conn, "checklist_edit.html")
-  end
-
   def checklist_delete(conn, %{"id" => id}) do
     checklist = Catalog.get_checklist!(id)
     {:ok, _checklist} = Catalog.delete_checklist(checklist)
