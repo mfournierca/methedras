@@ -22,7 +22,7 @@ defmodule MethedrasWeb.ChecklistAppController do
     end
   end
 
-  def checklist_edit(conn, %{"id" => _}) do
+  def edit(conn, %{"id" => _}) do
     render(conn, "edit.html")
   end
 
