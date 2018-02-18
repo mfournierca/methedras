@@ -14,14 +14,16 @@ defmodule MethedrasWeb.ChecklistAppController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"checklist_app" => checklist_app_params}) do
-    case Catalog.create_checklist_app(checklist_app_params) do
-      {:ok, checklist_app} ->
+  def create(conn, %{}) do
+    case Catalog.create_checklist(%{"data": %{"title": "default checklist title", "items": []}}) do
+      {:ok, checklist} ->
         conn
-        |> put_flash(:info, "Checklist app created successfully.")
-        |> redirect(to: checklist_app_path(conn, :show, checklist_app))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        |> put_flash(:info, "Checklist created successfully.")
+        |> redirect(to: page_path(conn, :edit, checklist))
+      {:error, %Ecto.Changeset{} = _} ->
+        conn
+        |> put_flash(:error, "Checklist creation failed.")
+        |> redirect(to: page_path(conn, :index))
     end
   end
 
