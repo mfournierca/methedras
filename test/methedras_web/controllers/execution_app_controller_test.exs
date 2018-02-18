@@ -3,6 +3,10 @@ defmodule MethedrasWeb.ExecutionAppControllerTest do
 
   alias Methedras.Catalog
 
+  # TODO: this was created with the --no-context and --no-schema options,
+  # so the assumptions this makes about DB and models are wrong.
+  # Also, some functions were removed from the controller.
+
   @create_attrs %{}
   @update_attrs %{}
   @invalid_attrs %{}
