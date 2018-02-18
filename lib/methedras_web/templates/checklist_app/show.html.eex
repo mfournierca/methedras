@@ -1,8 +1,0 @@
-<h2>Show Checklist app</h2>
-
-<ul>
-
-</ul>
-
-<span><%= link "Edit", to: checklist_app_path(@conn, :edit, @checklist_app) %></span>
-<span><%= link "Back", to: checklist_app_path(@conn, :index) %></span>
