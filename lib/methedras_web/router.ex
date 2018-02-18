@@ -2,6 +2,7 @@ defmodule MethedrasWeb.Router do
   use MethedrasWeb, :router
   alias MethedrasWeb.ChecklistController
   alias MethedrasWeb.ExecutionController
+  alias MethedrasWeb.ExecutionAppController
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -29,8 +30,14 @@ defmodule MethedrasWeb.Router do
     delete "/:id/delete", PageController, :checklist_delete
     get "/create", PageController, :checklist_create
 
-    get "/:checklist_id/execute", PageController, :execution_create
-    get "/:checklist_id/execute/:id", PageController, :execution_show
+    get "/:checklist_id/execute", ExecutionAppController, :create
+  end
+
+  scope "/execution", MethedrasWeb do
+    pipe_through :browser
+
+    get "/", ExecutionAppController, :index
+    get "/:id", ExecutionAppController, :show
   end
 
   scope "/api/v1/" do
