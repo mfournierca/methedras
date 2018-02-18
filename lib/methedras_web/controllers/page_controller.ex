@@ -24,19 +24,6 @@ defmodule MethedrasWeb.PageController do
     end
   end
 
-  def execution_create(conn, %{"checklist_id" => checklist_id}) do
-    checklist = Catalog.get_checklist!(checklist_id)
-    {:ok, execution} = Catalog.create_execution(%{"checklist_id": checklist.id, "data": checklist.data})
-
-    conn
-    |> put_flash(:info, "Created execution")
-    |> redirect(to: page_path(conn, :execution_show, execution.checklist_id, execution.id))
-  end
-
-  def execution_show(conn, %{"checklist_id" => _, "id" => _}) do
-    render(conn, "execution_show.html")
-  end
-
   def checklist_edit(conn, %{"id" => _}) do
     render(conn, "checklist_edit.html")
   end

@@ -1,5 +1,0 @@
-<h2>New Execution app</h2>
-
-<%= render "form.html", Map.put(assigns, :action, execution_app_path(@conn, :create)) %>
-
-<span><%= link "Back", to: execution_app_path(@conn, :index) %></span>

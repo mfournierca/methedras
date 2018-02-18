@@ -1,8 +1,2 @@
-<h2>Show Execution app</h2>
-
-<ul>
-
-</ul>
-
-<span><%= link "Edit", to: execution_app_path(@conn, :edit, @execution_app) %></span>
-<span><%= link "Back", to: execution_app_path(@conn, :index) %></span>
+<h2>Show Checklist</h2>
+<div id="react-application-root"/>
