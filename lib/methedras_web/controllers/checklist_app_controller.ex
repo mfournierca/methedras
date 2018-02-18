@@ -50,11 +50,11 @@ defmodule MethedrasWeb.ChecklistAppController do
   end
 
   def delete(conn, %{"id" => id}) do
-    checklist_app = Catalog.get_checklist_app!(id)
-    {:ok, _checklist_app} = Catalog.delete_checklist_app(checklist_app)
+    checklist = Catalog.get_checklist!(id)
+    {:ok, _checklist} = Catalog.delete_checklist(checklist)
 
     conn
-    |> put_flash(:info, "Checklist app deleted successfully.")
-    |> redirect(to: checklist_app_path(conn, :index))
+    |> put_flash(:info, "Checklist deleted successfully.")
+    |> redirect(to: page_path(conn, :index))
   end
 end
