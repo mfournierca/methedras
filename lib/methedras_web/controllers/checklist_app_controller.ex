@@ -5,8 +5,8 @@ defmodule MethedrasWeb.ChecklistAppController do
   alias Methedras.Catalog.ChecklistApp
 
   def index(conn, _params) do
-    checklistapp = Catalog.list_checklistapp()
-    render(conn, "index.html", checklistapp: checklistapp)
+    checklists = Catalog.list_checklists()
+    render(conn, "index.html", checklists: checklists)
   end
 
   def new(conn, _params) do

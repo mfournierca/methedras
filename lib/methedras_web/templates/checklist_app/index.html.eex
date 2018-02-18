@@ -1,24 +1,26 @@
-<h2>Listing Checklistapp</h2>
+<h2>Listing Checklists</h2>
 
 <table class="table">
   <thead>
     <tr>
+      <th>Data</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for checklist_app <- @checklistapp do %>
+<%= for checklist <- @checklists do %>
     <tr>
+      <td><%= checklist.data["title"] %></td>
 
       <td class="text-right">
-        <span><%= link "Show", to: checklist_app_path(@conn, :show, checklist_app), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: checklist_app_path(@conn, :edit, checklist_app), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: checklist_app_path(@conn, :delete, checklist_app), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <span><%= link "Show", to: page_path(@conn, :execution_create, checklist), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: page_path(@conn, :checklist_edit, checklist), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: page_path(@conn, :checklist_delete, checklist), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Checklist app", to: checklist_app_path(@conn, :new) %></span>
+<span><%= link "New Checklist", to: page_path(@conn, :checklist_create) %></span>

@@ -6,11 +6,6 @@ defmodule MethedrasWeb.PageController do
     render conn, "index.html"
   end
 
-  def checklist_index(conn, _params) do
-    checklists = Catalog.list_checklists()
-    render(conn, "checklist_index.html", checklists: checklists)
-  end
-
   def checklist_create(conn, %{}) do
     case Catalog.create_checklist(%{"data": %{"title": "default checklist title", "items": []}}) do
       {:ok, checklist} ->
