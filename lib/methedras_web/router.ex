@@ -28,7 +28,7 @@ defmodule MethedrasWeb.Router do
 
     get "/", ChecklistAppController, :index
     get "/create", ChecklistAppController, :create
-    get "/:id/", ChecklistAppController, :edit
+    get "/:id/", ChecklistAppController, :show
     get "/:id/edit", ChecklistAppController, :edit
     delete "/:id/delete", ChecklistAppController, :delete
 

@@ -26,6 +26,10 @@ defmodule MethedrasWeb.ChecklistAppController do
     render(conn, "edit.html")
   end
 
+  def show(conn, %{"id" => _}) do
+    render(conn, "show.html")
+  end
+
   def delete(conn, %{"id" => id}) do
     checklist = Catalog.get_checklist!(id)
     {:ok, _checklist} = Catalog.delete_checklist(checklist)
