@@ -3,6 +3,7 @@ defmodule MethedrasWeb.ChecklistAppController do
 
   alias Methedras.Catalog
   alias Methedras.Catalog.ChecklistApp
+  alias MethedrasWeb.ExecutionAppController
 
   def index(conn, _params) do
     checklists = Catalog.list_checklists()
@@ -33,5 +34,10 @@ defmodule MethedrasWeb.ChecklistAppController do
     conn
     |> put_flash(:info, "Checklist deleted successfully.")
     |> redirect(to: page_path(conn, :index))
+  end
+
+  def create_execution(conn, %{"id" => id}) do
+    conn
+    |> redirect(to: page_path(ExecutionAppController, :create, %{"checklist_id" => id}))
   end
 end
