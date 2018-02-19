@@ -1,6 +1,5 @@
 import { ACTIONS } from "../actions/Actions"
 import { socket, channel } from "../socket"
-import { canEdit, canCheck } from "../utils/utils"
 
 var DEFAULT_STATE = {
   id: "unique-checklist-id",
