@@ -1,50 +1,9 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Checklist from './Checklist'
 import { ACTIONS } from '../actions/Actions'
 import { saveChecklistState, saveExecutionState, loadChecklistState, loadExecutionState } from '../utils/api'
-import { canEdit, canCheck } from '../utils/utils'
+import BaseApplication from './BaseApplication'
 
-class ExecuteApp extends Component {
-
-  componentDidMount() {
-    this.props.loadState()
-  }
-
-  render() {
-
-    const {
-      state,
-      match,
-      onToggleCheck,
-      onTextChange,
-      onNewItem,
-      onUpdateTitle,
-      onSave
-    } = this.props;
-
-    console.log("routerMatch: " + JSON.stringify(match));
-
-    if (!(state === undefined || state.loading === undefined) && state.loading) {
-      return (
-        <div>Loading ... </div>
-      );
-    } else {
-      return (
-        <div>
-          <h2>Application</h2>
-          <Checklist
-            state={ state.checklist }
-            onToggleCheck={ onToggleCheck }
-            onTextChange={ onTextChange }
-            onNewItem={ onNewItem }
-            onUpdateTitle={ onUpdateTitle }
-            onSave={ onSave }
-          />
-        </div>
-      );
-    }
-  }
+class ExecuteApplication extends BaseApplication {
 }
 
 const mapStateToProps = (state) => {
@@ -64,6 +23,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const ExecuteApplication = connect(mapStateToProps, mapDispatchToProps)(ExecuteApp)
-
-export default ExecuteApplication
+export default connect(mapStateToProps, mapDispatchToProps)(ExecuteApplication)

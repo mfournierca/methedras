@@ -1,7 +1,7 @@
 import { IndexRoute, Route }          from 'react-router';
 import React                          from 'react';
-import ChecklistApplication                    from '../components/ChecklistApplication';
-import ExecuteApplication                    from '../components/ExecuteApplication';
+import ChecklistApplication           from '../components/ChecklistApplication';
+import ExecuteApplication             from '../components/ExecuteApplication';
 
 export default function configRoutes() {
 
