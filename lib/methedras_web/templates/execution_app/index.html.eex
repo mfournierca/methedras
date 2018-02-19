@@ -10,10 +10,10 @@
   <tbody>
 <%= for execution <- @executions do %>
     <tr>
+      <td><%= execution.data["title"] %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: execution_app_path(@conn, :show, execution), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: execution_app_path(@conn, :edit, execution), class: "btn btn-default btn-xs" %></span>
       </td>
     </tr>
 <% end %>

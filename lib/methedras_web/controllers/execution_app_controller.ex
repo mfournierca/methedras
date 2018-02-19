@@ -14,7 +14,7 @@ defmodule MethedrasWeb.ExecutionAppController do
 
     conn
     |> put_flash(:info, "Created execution")
-    |> redirect(to: page_path(conn, :show, execution.id))
+    |> redirect(to: execution_app_path(conn, :show, execution.id))
   end
 
   def show(conn, %{"id" => _}) do
