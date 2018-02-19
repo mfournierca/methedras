@@ -9,8 +9,8 @@ export default function configRoutes() {
 
   return (
     <div>
-      <Route path='/checklist' component={ ChecklistApplication } />
-      <Route path='/execute' component={ ExecuteApplication } />
+      <Route path='/checklist/:id' component={ ChecklistApplication } />
+      <Route path='/execute/:id' component={ ExecuteApplication } />
     </div>
   );
 }
