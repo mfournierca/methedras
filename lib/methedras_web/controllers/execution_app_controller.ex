@@ -2,7 +2,6 @@ defmodule MethedrasWeb.ExecutionAppController do
   use MethedrasWeb, :controller
 
   alias Methedras.Catalog
-  alias Methedras.Catalog.ExecutionApp
 
   def index(conn, _params) do
     executions = Catalog.list_executions()

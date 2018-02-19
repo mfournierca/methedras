@@ -2,7 +2,6 @@ defmodule MethedrasWeb.ChecklistAppController do
   use MethedrasWeb, :controller
 
   alias Methedras.Catalog
-  alias Methedras.Catalog.ChecklistApp
   alias MethedrasWeb.ExecutionAppController
 
   def index(conn, _params) do
