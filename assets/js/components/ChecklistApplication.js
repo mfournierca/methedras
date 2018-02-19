@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
     onNewItem:        () => { dispatch({type: ACTIONS.NEWITEM}) },
     onUpdateTitle:    (title) => { dispatch({type: ACTIONS.UPDATETITLE, title: title}) },
     onSave:           (state) => { saveChecklistState(dispatch, state) },
-    loadState:        (id) => { loadChecklistState(dispatch, id) }
+    loadState:        (checklist_id) => { loadChecklistState(dispatch, checklist_id) }
   }
 }
 

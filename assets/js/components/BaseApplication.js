@@ -5,7 +5,7 @@ export default class BaseApp extends Component {
 
   componentDidMount() {
     // match is passed in from the router.
-    this.props.loadState(this.props.match.id)
+    this.props.loadState(this.props.match.params.id)
   }
 
   render() {

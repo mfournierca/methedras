@@ -2,6 +2,7 @@ const jquery = require("jquery")
 import { ACTIONS } from "../actions/Actions"
 
 function getCSRF() {
+  // TODO: Use a jquery selector for this
   var csrf = null
   var meta_tags = document.getElementsByTagName("meta")
   for (var i = 0; i < meta_tags.length; i++) {
@@ -74,7 +75,7 @@ function unWindChecklistState(checklistState) {
 }
 
 const saveChecklistState = (dispatch, state) => {
-  var dest = getChecklistApiPath()
+  var dest = getChecklistApiPath(state.id)
   put(
     dest,
     {"data": {"data": state.data}}, // strip out the id
@@ -84,7 +85,7 @@ const saveChecklistState = (dispatch, state) => {
 };
 
 const saveExecutionState = (dispatch, state) => {
-  var dest = getExecutionApiPath()
+  var dest = getExecutionApiPath(state.id)
   put(
     dest,
     {"execution": {"data": state.data}}, // strip out ids
@@ -93,15 +94,15 @@ const saveExecutionState = (dispatch, state) => {
   );
 }
 
-const loadChecklistState = (dispatch, id) => {
-  var dest = getChecklistApiPath(id)
+const loadChecklistState = (dispatch, checklist_id) => {
+  var dest = getChecklistApiPath(checklist_id)
   get(
     dest,
     (response, code, xhr) => {
       var checklistState = unWindChecklistState(xhr.responseJSON["data"])
       dispatch({
         type: ACTIONS.SETSTATE,
-        state: {
+        state: {   // strip out everything but id and data
           id: checklistState["id"],
           data: checklistState["data"]
         }
@@ -111,15 +112,15 @@ const loadChecklistState = (dispatch, id) => {
   );
 }
 
-const loadExecutionState = (dispatch, id) => {
-  var dest = getExecutionApiPath(id)
+const loadExecutionState = (dispatch, execution_id) => {
+  var dest = getExecutionApiPath(execution_id)
   get(
     dest,
     (response, code, xhr) => {
       var executionState = unWindChecklistState(xhr.responseJSON["data"])
       dispatch({
         type: ACTIONS.SETSTATE,
-        state: {
+        state: {    // strip out everything but id and data
           id: executionState["id"],
           data: executionState["data"]
         }
