@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
     onNewItem:        () => { console.log("Cannot add item in execute mode") },
     onUpdateTitle:    (title) => { console.log("Cannot edit title in execute mode") },
     onSave:           (state) => { saveExecutionState(dispatch, state) },
-    loadState:        () => { loadExecutionState(dispatch) }
+    loadState:        (id) => { loadExecutionState(dispatch, id) }
   }
 }
 

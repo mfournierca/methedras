@@ -4,7 +4,8 @@ import Checklist from './Checklist'
 export default class BaseApp extends Component {
 
   componentDidMount() {
-    this.props.loadState()
+    // match is passed in from the router.
+    this.props.loadState(this.props.match.id)
   }
 
   render() {

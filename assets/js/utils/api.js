@@ -13,16 +13,12 @@ function getCSRF() {
   return csrf
 }
 
-function getChecklistApiPath() {
-  var id = window.location.pathname.split("/")[2]
-  var dest = "http://" + window.location.host.toString() + "/api/v1/checklist/" + id
-  return dest
+function getChecklistApiPath(id) {
+  return "http://" + window.location.host.toString() + "/api/v1/checklist/" + id
 }
 
-function getExecutionApiPath() {
-  var id = window.location.pathname.split("/")[4]
-  var dest = "http://" + window.location.host.toString() + "/api/v1/execution/" + id
-  return dest
+function getExecutionApiPath(id) {
+  return "http://" + window.location.host.toString() + "/api/v1/execution/" + id
 }
 
 function put(url, data, onSuccess, onError) {
@@ -97,8 +93,8 @@ const saveExecutionState = (dispatch, state) => {
   );
 }
 
-const loadChecklistState = (dispatch) => {
-  var dest = getChecklistApiPath()
+const loadChecklistState = (dispatch, id) => {
+  var dest = getChecklistApiPath(id)
   get(
     dest,
     (response, code, xhr) => {
@@ -115,8 +111,8 @@ const loadChecklistState = (dispatch) => {
   );
 }
 
-const loadExecutionState = (dispatch) => {
-  var dest = getExecutionApiPath()
+const loadExecutionState = (dispatch, id) => {
+  var dest = getExecutionApiPath(id)
   get(
     dest,
     (response, code, xhr) => {
