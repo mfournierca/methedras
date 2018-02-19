@@ -35,7 +35,7 @@ defmodule MethedrasWeb.Router do
     get "/:checklist_id/execute", ExecutionAppController, :create
   end
 
-  scope "/execution" do
+  scope "/execute" do
     pipe_through :browser
 
     get "/", ExecutionAppController, :index
