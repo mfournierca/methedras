@@ -22,7 +22,7 @@ export default class BaseApp extends Component {
 
     console.log("routerMatch: " + JSON.stringify(match));
 
-    if (!(state === undefined || state.loading === undefined) && state.loading) {
+    if (!(state === undefined || state.checklist.loading === undefined) && state.checklist.loading) {
       return (
         <div>Loading ... </div>
       );
