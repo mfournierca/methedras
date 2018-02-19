@@ -5,7 +5,7 @@ import { ACTIONS } from '../actions/Actions'
 import { saveChecklistState, saveExecutionState, loadChecklistState, loadExecutionState } from '../utils/api'
 import { canEdit, canCheck } from '../utils/utils'
 
-class App extends Component {
+class ChecklistApp extends Component {
 
   componentDidMount() {
     this.props.loadState()
@@ -78,6 +78,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const Application = connect(mapStateToProps, mapDispatchToProps)(App)
+const ChecklistApplication = connect(mapStateToProps, mapDispatchToProps)(ChecklistApp)
 
-export default Application
+export default ChecklistApplication
