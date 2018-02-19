@@ -54,27 +54,13 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-
-  if (!canCheck() && canEdit) {
-    return {
-      onToggleCheck:    (index, value) => { console.log("canCheck flag is false, cannot check item") },
-      onTextChange:     (index, content) => { dispatch({type: ACTIONS.UPDATETEXT, index: index, content: content}) },
-      onNewItem:        () => { dispatch({type: ACTIONS.NEWITEM}) },
-      onUpdateTitle:    (title) => { dispatch({type: ACTIONS.UPDATETITLE, title: title}) },
-      onSave:           (state) => { saveChecklistState(dispatch, state) },
-      loadState:        () => { loadChecklistState(dispatch) }
-    }
-  } else if (canCheck() && !canEdit()) {
-    return {
-      onToggleCheck:    (index, value) => { dispatch({type: ACTIONS.TOGGLECHECK, index: index, value: value}) },
-      onTextChange:     (index, content) => { console.log("canEdit is false, cannot edit text") },
-      onNewItem:        () => { console.log("canEdit is false, cannot add new item") },
-      onUpdateTitle:    (title) => { console.log("canEdit is false, cannot edit title") },
-      onSave:           (state) => { saveExecutionState(dispatch, state) },
-      loadState:        () => { loadExecutionState(dispatch) }
-    }
-  } else {
-    console.log("Invalid url path state")
+  return {
+    onToggleCheck:    (index, value) => { dispatch({type: ACTIONS.TOGGLECHECK, index: index, value: value}) },
+    onTextChange:     (index, content) => { console.log("Cannot edit item in execute mode") },
+    onNewItem:        () => { console.log("Cannot add item in execute mode") },
+    onUpdateTitle:    (title) => { console.log("Cannot edit title in execute mode") },
+    onSave:           (state) => { saveExecutionState(dispatch, state) },
+    loadState:        () => { loadExecutionState(dispatch) }
   }
 }
 
