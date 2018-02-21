@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Checklist from './Checklist'
+import Checklist from '../widgets/Checklist'
 
 export default class BaseApp extends Component {
 

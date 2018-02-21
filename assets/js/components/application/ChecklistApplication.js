@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { ACTIONS } from '../actions/Actions'
-import { saveChecklistState, saveExecutionState, loadChecklistState, loadExecutionState } from '../utils/api'
+import { ACTIONS } from '../../actions/Actions'
+import { saveChecklistState, saveExecutionState, loadChecklistState, loadExecutionState } from '../../utils/api'
 import BaseApplication from './BaseApplication'
 
 class ChecklistApplication extends BaseApplication {
