@@ -14,11 +14,11 @@ defmodule MethedrasWeb.ChecklistAppController do
       {:ok, checklist} ->
         conn
         |> put_flash(:info, "Checklist created successfully.")
-        |> redirect(to: page_path(conn, :edit, checklist))
+        |> redirect(to: checklist_app_path(conn, :edit, checklist))
       {:error, %Ecto.Changeset{} = _} ->
         conn
         |> put_flash(:error, "Checklist creation failed.")
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: checklist_app_path(conn, :index))
     end
   end
 
@@ -36,11 +36,11 @@ defmodule MethedrasWeb.ChecklistAppController do
 
     conn
     |> put_flash(:info, "Checklist deleted successfully.")
-    |> redirect(to: page_path(conn, :index))
+    |> redirect(to: checklist_app_path(conn, :index))
   end
 
   def create_execution(conn, %{"id" => id}) do
     conn
-    |> redirect(to: page_path(ExecutionAppController, :create, %{"checklist_id" => id}))
+    |> redirect(to: checklist_app_path(ExecutionAppController, :create, %{"checklist_id" => id}))
   end
 end
