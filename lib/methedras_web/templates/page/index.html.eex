@@ -16,6 +16,12 @@
       <li>
         <a href="https://github.com/phoenixframework/phoenix">Source</a>
       </li>
+      <li>
+        <%= link "Log in with Google", to: auth_path(@conn, :request) %>
+      </li>
+      <li>
+        <%= link "Log out", to: auth_path(@conn, :delete) %>
+      </li>
     </ul>
   </div>
 
