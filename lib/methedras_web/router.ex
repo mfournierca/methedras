@@ -1,5 +1,6 @@
 defmodule MethedrasWeb.Router do
   use MethedrasWeb, :router
+
   alias MethedrasWeb.ChecklistController
   alias MethedrasWeb.ExecutionController
   alias MethedrasWeb.ExecutionAppController
@@ -17,6 +18,10 @@ defmodule MethedrasWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :browser_auth do
+    plug Methedras.Guardian.Plug.VerifySession, realm: "Methedras"
+  end
+
   scope "/", MethedrasWeb do
     pipe_through :browser # Use the default browser stack
 
@@ -24,7 +29,7 @@ defmodule MethedrasWeb.Router do
   end
 
   scope "/checklist" do
-    pipe_through :browser
+    pipe_through [:browser, :browser_auth]
 
     get "/", ChecklistAppController, :index
     get "/create", ChecklistAppController, :create
