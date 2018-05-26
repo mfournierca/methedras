@@ -41,14 +41,14 @@ defmodule MethedrasWeb.Router do
   end
 
   scope "/execute" do
-    pipe_through :browser
+    pipe_through [:browser, :browser_auth]
 
     get "/", ExecutionAppController, :index
     get "/:id", ExecutionAppController, :show
   end
 
   scope "/api/v1/" do
-    pipe_through :api
+    pipe_through [:api, :browser_auth] # All api requests come from the user's browser session
 
     resources "/checklist", ChecklistController
     resources "/execution", ExecutionController
