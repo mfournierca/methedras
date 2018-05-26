@@ -19,7 +19,8 @@ defmodule MethedrasWeb.Router do
   end
 
   pipeline :browser_auth do
-    plug Guardian.Plug.VerifySession, module: MethedrasWeb.Guardian
+    plug Guardian.Plug.VerifySession, module: MethedrasWeb.Guardian, error_handler: MethedrasWeb.AuthErrorHandler
+    plug Guardian.Plug.LoadResource, module: MethedrasWeb.Guardian, error_handler: MethedrasWeb.AuthErrorHandler
   end
 
   scope "/", MethedrasWeb do
