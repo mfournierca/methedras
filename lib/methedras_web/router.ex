@@ -19,7 +19,7 @@ defmodule MethedrasWeb.Router do
   end
 
   pipeline :browser_auth do
-    plug Methedras.Guardian.Plug.VerifySession, realm: "Methedras"
+    plug Guardian.Plug.VerifySession, module: MethedrasWeb.Guardian
   end
 
   scope "/", MethedrasWeb do

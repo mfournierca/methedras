@@ -1,4 +1,4 @@
-defmodule Methedras.Guardian do
+defmodule MethedrasWeb.Guardian do
   use Guardian, otp_app: :methedras
 
   def subject_for_token(resource, _claims) do

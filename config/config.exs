@@ -31,7 +31,7 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_CLIENT_ID"),
   client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
 
-config :methedras, Methedras.Guardian,
+config :methedras, MethedrasWeb.Guardian,
   issuer: "methedras",
   secret_key: "LzrREdVf23v1sinXTgXTfEwRx6AeuBmd9f8qdP4IIA2IeKXVz9K2IXB+PgL+NJKj"
 
